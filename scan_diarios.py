@@ -28,6 +28,9 @@ def scan_diarios(base_path):
                     "tomos": tomo_files
                 })
     
+    # Sort: 'el guardian' first, then the rest alphabetically
+    diarios.sort(key=lambda x: (x['name'].lower() != 'el guardian', x['name'].lower()))
+    
     return diarios
 
 if __name__ == "__main__":

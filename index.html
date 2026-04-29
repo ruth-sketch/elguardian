@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Guardián - Diario Escolar</title>
+    <meta name="description" content="Ediciones digitales del diario escolar El Guardián. La noticia bajo vigilancia.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            light: '#3b82f6',
+                            DEFAULT: '#1d4ed8',
+                            dark: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'slide-up': 'slideUp 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            margin: 0;
+            padding: 0;
+        }
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /* Scrollbar Customization */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+        /* Animations */
+        .animate-delay-100 { animation-delay: 100ms; }
+        .animate-delay-200 { animation-delay: 200ms; }
+        .animate-delay-300 { animation-delay: 300ms; }
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        .pdf-container {
+            height: calc(100vh - 120px);
+            width: 100%;
+        }
+        .glass-morphism {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+
+    <!-- React & Babel CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="min-h-screen selection:bg-brand/30">
+    <div id="root">
+        <!-- Loader inicial -->
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="animate-pulse flex flex-col items-center">
+                <div class="w-16 h-16 bg-brand rounded-full mb-4"></div>
+                <p class="text-slate-400">Cargando El Guardián...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- React Application Code -->
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const Header = ({ onHome, currentDiario, currentTomo }) => (
+            <header className="fixed top-0 left-0 right-0 z-50 glass py-4 px-6 md:px-12 flex items-center justify-between">
+                <div 
+                    className="flex items-center gap-3 cursor-pointer group"
+                    onClick={onHome}
+                >
+                    <div className="w-10 h-10 bg-brand rounded-lg flex items-center justify-center font-bold text-xl group-hover:rotate-12 transition-transform">G</div>
+                    <h1 className="text-xl md:text-2xl font-bold tracking-tight uppercase">EL GUARDIÁN</h1>
+                </div>
+                <nav className="hidden md:flex gap-8 text-sm font-medium text-slate-300">
+                    <button onClick={onHome} className="hover:text-brand transition-colors">Inicio</button>
+                    {currentDiario && <span className="text-slate-600">/</span>}
+                    {currentDiario && <button className="text-brand font-bold">{currentDiario.name}</button>}
+                </nav>
+                <div className="flex gap-4">
+                    <button className="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full text-sm font-semibold transition-all hidden sm:block">
+                        Archivo
+                    </button>
+                    <button className="bg-brand hover:bg-brand-dark px-4 py-2 rounded-full text-sm font-semibold transition-all">
+                        Contacto
+                    </button>
+                </div>
+            </header>
+        );
+
+        const DiarioCard = ({ diario, onClick }) => (
+            <div 
+                className="glass rounded-2xl overflow-hidden card-hover cursor-pointer group animate-slide-up"
+                onClick={() => onClick(diario)}
+            >
+                <div className="aspect-video overflow-hidden relative bg-slate-800 flex items-center justify-center">
+                    <div className="text-6xl opacity-20 group-hover:scale-110 transition-transform duration-500">📰</div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60"></div>
+                    <div className="absolute bottom-4 left-4 right-4">
+                        <span className="bg-brand text-[10px] uppercase font-bold px-2 py-1 rounded mb-2 inline-block tracking-wider">
+                            {diario.tomos.length} Tomos
+                        </span>
+                        <h3 className="text-2xl font-bold capitalize">{diario.name}</h3>
+                    </div>
+                </div>
+                <div className="p-5">
+                    <p className="text-slate-400 text-sm mb-4 line-clamp-2 italic">
+                        Explora las ediciones de {diario.name}.
+                    </p>
+                    <button className="text-brand font-semibold text-sm flex items-center gap-2 group/btn">
+                        Ver Tomos 
+                        <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
+                    </button>
+                </div>
+            </div>
+        );
+
+        const TomoCard = ({ tomo, onClick }) => {
+            const isPdf = tomo.path.toLowerCase().endsWith('.pdf');
+            return (
+                <div 
+                    className="glass rounded-xl p-4 flex items-center gap-4 card-hover cursor-pointer group animate-slide-up"
+                    onClick={() => onClick(tomo)}
+                >
+                    <div className="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center text-2xl">
+                        {isPdf ? '📄' : '🖼️'}
+                    </div>
+                    <div className="flex-1 overflow-hidden">
+                        <h4 className="font-semibold truncate text-slate-200">{tomo.name}</h4>
+                        <p className="text-xs text-slate-500 uppercase">{isPdf ? 'Documento PDF' : 'Imagen'}</p>
+                    </div>
+                    <div className="text-brand opacity-0 group-hover:opacity-100 transition-opacity">
+                        →
+                    </div>
+                </div>
+            );
+        };
+
+        const Viewer = ({ tomo, onBack }) => {
+            const isPdf = tomo.path.toLowerCase().endsWith('.pdf');
+            return (
+                <div className="fixed inset-0 z-[60] bg-slate-950 animate-fade-in overflow-hidden flex flex-col">
+                    <div className="glass p-4 flex items-center justify-between">
+                        <button 
+                            onClick={onBack}
+                            className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors"
+                        >
+                            <span className="text-xl">←</span> Volver
+                        </button>
+                        <div className="text-center flex-1 mx-4">
+                            <h2 className="font-bold truncate max-w-md">{tomo.name}</h2>
+                        </div>
+                        <div className="w-24 flex justify-end">
+                            <a 
+                                href={tomo.path} 
+                                download 
+                                className="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1 rounded-md transition-colors"
+                            >
+                                Descargar
+                            </a>
+                        </div>
+                    </div>
+                    <div className="flex-1 bg-slate-900 overflow-auto flex items-center justify-center p-4">
+                        {isPdf ? (
+                            <iframe 
+                                src={tomo.path + "#toolbar=0"}
+                                className="w-full h-full max-w-5xl rounded-lg shadow-2xl border-none"
+                                title={tomo.name}
+                            ></iframe>
+                        ) : (
+                            <img 
+                                src={tomo.path} 
+                                alt={tomo.name} 
+                                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                            />
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        const App = () => {
+            const [diarios, setDiarios] = useState([]);
+            const [currentDiario, setCurrentDiario] = useState(null);
+            const [selectedTomo, setSelectedTomo] = useState(null);
+            const [loading, setLoading] = useState(true);
+            const [error, setError] = useState(null);
+
+            useEffect(() => {
+                fetch('diarios.json')
+                    .then(res => {
+                        if (!res.ok) throw new Error('No se pudo cargar la base de datos');
+                        return res.json();
+                    })
+                    .then(data => {
+                        setDiarios(data);
+                        setLoading(false);
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        setError(err.message);
+                        setLoading(false);
+                    });
+            }, []);
+
+            const handleHome = () => {
+                setSelectedTomo(null);
+                setCurrentDiario(null);
+            };
+
+            if (loading) {
+                return (
+                    <div className="flex flex-col items-center justify-center min-h-screen bg-slate-950">
+                        <div className="w-12 h-12 border-4 border-brand border-t-transparent rounded-full animate-spin mb-4"></div>
+                        <p className="text-slate-400 font-medium">Cargando archivo digital...</p>
+                    </div>
+                );
+            }
+
+            if (error) {
+                return (
+                    <div className="flex items-center justify-center min-h-screen bg-slate-950 text-red-400 p-8 text-center">
+                        <div>
+                            <h2 className="text-2xl font-bold mb-2">Error</h2>
+                            <p>{error}</p>
+                            <button 
+                                onClick={() => window.location.reload()}
+                                className="mt-4 bg-slate-800 px-4 py-2 rounded-lg text-white"
+                            >
+                                Reintentar
+                            </button>
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="min-h-screen pb-20">
+                    <Header 
+                        onHome={handleHome} 
+                        currentDiario={currentDiario} 
+                    />
+                    
+                    <main className="container mx-auto px-6 pt-32">
+                        {selectedTomo && (
+                            <Viewer 
+                                tomo={selectedTomo} 
+                                onBack={() => setSelectedTomo(null)} 
+                            />
+                        )}
+
+                        {!currentDiario ? (
+                            <div className="animate-fade-in">
+                                <section className="mb-16 text-center md:text-left">
+                                    <h2 className="text-4xl md:text-6xl font-bold mb-4 animate-slide-up">
+                                        Archivo <span className="gradient-text">Digital</span>
+                                    </h2>
+                                    <p className="text-slate-400 text-lg md:text-xl max-w-2xl animate-slide-up animate-delay-100">
+                                        Selecciona un diario para explorar sus ediciones y publicaciones.
+                                    </p>
+                                </section>
+
+                                <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                                    {diarios.map((diario, index) => (
+                                        <DiarioCard 
+                                            key={index} 
+                                            diario={diario} 
+                                            onClick={setCurrentDiario} 
+                                        />
+                                    ))}
+                                </section>
+                            </div>
+                        ) : (
+                            <div className="animate-fade-in">
+                                <section className="mb-8 flex items-center justify-between">
+                                    <div>
+                                        <button 
+                                            onClick={() => setCurrentDiario(null)}
+                                            className="text-brand hover:underline text-sm mb-2 block"
+                                        >
+                                            ← Volver a Diarios
+                                        </button>
+                                        <h2 className="text-3xl md:text-5xl font-bold capitalize">
+                                            {currentDiario.name}
+                                        </h2>
+                                    </div>
+                                    <div className="bg-slate-800/50 px-4 py-2 rounded-xl border border-white/5">
+                                        <span className="text-slate-400 text-sm font-medium">
+                                            {currentDiario.tomos.length} Ediciones encontradas
+                                        </span>
+                                    </div>
+                                </section>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                    {currentDiario.tomos.map((tomo, index) => (
+                                        <TomoCard 
+                                            key={index} 
+                                            tomo={tomo} 
+                                            onClick={setSelectedTomo} 
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </main>
+
+                    {!selectedTomo && (
+                        <footer className="mt-32 py-12 border-t border-slate-800/50 text-center text-slate-500 text-sm">
+                            <p>© 2026 El Guardián - Diario Escolar</p>
+                            <p className="mt-2 text-slate-600">Sistema Automatizado de Archivo</p>
+                        </footer>
+                    )}
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

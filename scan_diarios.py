@@ -32,7 +32,8 @@ def scan_diarios(base_path):
     priority = {
         'el guardian': 0,
         'el universo': 1,
-        'el observador': 2
+        'el observador': 2,
+        'el guardian ii': 1000  # Put it last
     }
     
     diarios.sort(key=lambda x: (priority.get(x['name'].lower(), 99), x['name'].lower()))

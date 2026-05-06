@@ -97,6 +97,7 @@
             background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%);
             -webkit-background-clip: text;
             -background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -143,29 +144,155 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        const Header = ({ onHome, currentDiario, currentTomo }) => (
+        const Header = ({ onHome, onNavigate, currentView, currentDiario }) => (
             <header className="fixed top-0 left-0 right-0 z-50 glass py-4 px-6 md:px-12 flex items-center justify-between">
                 <div
                     className="flex items-center gap-3 cursor-pointer group"
                     onClick={onHome}
                 >
-                    <div className="w-10 h-10 bg-brand rounded-lg flex items-center justify-center font-bold text-xl group-hover:rotate-12 transition-transform">G</div>
+                    <div className="w-10 h-10 bg-brand rounded-lg flex items-center justify-center font-bold text-xl group-hover:rotate-12 transition-transform shadow-lg shadow-brand/20">G</div>
                     <h1 className="text-xl md:text-2xl font-bold tracking-tight uppercase">EL GUARDIÁN</h1>
                 </div>
                 <nav className="hidden md:flex gap-8 text-sm font-medium text-slate-300">
-                    <button onClick={onHome} className="hover:text-brand transition-colors">Inicio</button>
+                    <button 
+                        onClick={onHome} 
+                        className={`hover:text-brand transition-colors ${currentView === 'archive' && !currentDiario ? 'text-brand font-bold' : ''}`}
+                    >
+                        Inicio
+                    </button>
+                    <button 
+                        onClick={() => onNavigate('about')} 
+                        className={`hover:text-brand transition-colors ${currentView === 'about' ? 'text-brand font-bold' : ''}`}
+                    >
+                        Quiénes Somos
+                    </button>
                     {currentDiario && <span className="text-slate-600">/</span>}
                     {currentDiario && <button className="text-brand font-bold">{currentDiario.name}</button>}
                 </nav>
                 <div className="flex gap-4">
-                    <button className="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full text-sm font-semibold transition-all hidden sm:block">
-                        Archivo
-                    </button>
-                    <button className="bg-brand hover:bg-brand-dark px-4 py-2 rounded-full text-sm font-semibold transition-all">
+                    <button 
+                        onClick={() => onNavigate('contact')}
+                        className={`bg-brand hover:bg-brand-dark px-6 py-2 rounded-full text-sm font-semibold transition-all shadow-lg shadow-brand/20 ${currentView === 'contact' ? 'ring-2 ring-white/50' : ''}`}
+                    >
                         Contacto
                     </button>
                 </div>
             </header>
+        );
+
+        const AboutPage = () => (
+            <div className="animate-fade-in max-w-4xl mx-auto">
+                <section className="mb-16 text-center">
+                    <h2 className="text-4xl md:text-6xl font-bold mb-6">
+                        Quiénes <span className="gradient-text">Somos</span>
+                    </h2>
+                    <p className="text-slate-400 text-lg md:text-xl leading-relaxed">
+                        El Guardián es un proyecto periodístico escolar dedicado a informar con veracidad y compromiso. 
+                        Nuestro equipo está conformado por estudiantes apasionados por la comunicación y la tecnología.
+                    </p>
+                </section>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                    <div className="glass p-8 rounded-2xl border border-white/5">
+                        <h3 className="text-2xl font-bold mb-4 text-brand">Nuestra Misión</h3>
+                        <p className="text-slate-300">
+                            Fomentar el pensamiento crítico y la participación estudiantil a través de un periodismo ético y de calidad, 
+                            sirviendo como puente de comunicación en nuestra comunidad educativa.
+                        </p>
+                    </div>
+                    <div className="glass p-8 rounded-2xl border border-white/5">
+                        <h3 className="text-2xl font-bold mb-4 text-brand">Nuestra Visión</h3>
+                        <p className="text-slate-300">
+                            Convertirnos en el referente digital de información escolar, integrando nuevas tecnologías 
+                            para preservar la memoria histórica de nuestra institución.
+                        </p>
+                    </div>
+                </div>
+
+                <section>
+                    <h3 className="text-3xl font-bold mb-8 text-center">Nuestro Equipo</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {[
+                            { name: "Editor General", role: "Coordinación Editorial", icon: "✍️" },
+                            { name: "Equipo de Redacción", role: "Investigación y Notas", icon: "📰" },
+                            { name: "Diseño y Tech", role: "Plataforma Digital", icon: "💻" }
+                        ].map((member, i) => (
+                            <div key={i} className="glass p-6 rounded-xl text-center card-hover">
+                                <div className="w-20 h-20 bg-slate-800 rounded-full mx-auto mb-4 flex items-center justify-center text-3xl">
+                                    {member.icon}
+                                </div>
+                                <h4 className="font-bold text-lg">{member.name}</h4>
+                                <p className="text-brand text-sm">{member.role}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            </div>
+        );
+
+        const ContactPage = () => (
+            <div className="animate-fade-in max-w-5xl mx-auto">
+                <section className="mb-12 text-center md:text-left">
+                    <h2 className="text-4xl md:text-6xl font-bold mb-4">
+                        Ponte en <span className="gradient-text">Contacto</span>
+                    </h2>
+                    <p className="text-slate-400 text-lg">
+                        ¿Tienes alguna duda, sugerencia o quieres colaborar con nosotros? Escríbenos.
+                    </p>
+                </section>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div className="glass p-8 rounded-3xl border border-white/10">
+                        <form className="space-y-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-400 mb-2">Nombre</label>
+                                    <input type="text" className="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:border-brand transition-colors" placeholder="Tu nombre" />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-400 mb-2">Email</label>
+                                    <input type="email" className="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:border-brand transition-colors" placeholder="correo@ejemplo.com" />
+                                </div>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-slate-400 mb-2">Asunto</label>
+                                <input type="text" className="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:border-brand transition-colors" placeholder="¿En qué podemos ayudarte?" />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-slate-400 mb-2">Mensaje</label>
+                                <textarea className="w-full bg-slate-900/50 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:border-brand transition-colors h-32" placeholder="Escribe tu mensaje aquí..."></textarea>
+                            </div>
+                            <button type="button" className="w-full bg-brand hover:bg-brand-dark text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-brand/20">
+                                Enviar Mensaje
+                            </button>
+                        </form>
+                    </div>
+
+                    <div className="flex flex-col justify-center space-y-8">
+                        <div className="flex items-start gap-4">
+                            <div className="w-12 h-12 bg-brand/10 rounded-xl flex items-center justify-center text-brand text-2xl">📍</div>
+                            <div>
+                                <h4 className="font-bold text-lg">Ubicación</h4>
+                                <p className="text-slate-400">Sede Escolar Central</p>
+                            </div>
+                        </div>
+                        <div className="flex items-start gap-4">
+                            <div className="w-12 h-12 bg-brand/10 rounded-xl flex items-center justify-center text-brand text-2xl">📧</div>
+                            <div>
+                                <h4 className="font-bold text-lg">Email</h4>
+                                <p className="text-slate-400">contacto@elguardian.edu</p>
+                            </div>
+                        </div>
+                        <div className="flex items-start gap-4">
+                            <div className="w-12 h-12 bg-brand/10 rounded-xl flex items-center justify-center text-brand text-2xl">📱</div>
+                            <div>
+                                <h4 className="font-bold text-lg">Redes Sociales</h4>
+                                <p className="text-slate-400">@elguardian_escolar</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         );
 
         const DiarioCard = ({ diario, onClick }) => (
@@ -261,6 +388,7 @@
 
         const App = () => {
             const [diarios, setDiarios] = useState([]);
+            const [currentView, setCurrentView] = useState('archive'); // 'archive', 'about', 'contact'
             const [currentDiario, setCurrentDiario] = useState(null);
             const [selectedTomo, setSelectedTomo] = useState(null);
             const [loading, setLoading] = useState(true);
@@ -286,6 +414,13 @@
             const handleHome = () => {
                 setSelectedTomo(null);
                 setCurrentDiario(null);
+                setCurrentView('archive');
+            };
+
+            const handleNavigate = (view) => {
+                setSelectedTomo(null);
+                setCurrentDiario(null);
+                setCurrentView(view);
             };
 
             if (loading) {
@@ -318,6 +453,8 @@
                 <div className="min-h-screen pb-20">
                     <Header
                         onHome={handleHome}
+                        onNavigate={handleNavigate}
+                        currentView={currentView}
                         currentDiario={currentDiario}
                     />
 
@@ -329,7 +466,10 @@
                             />
                         )}
 
-                        {!currentDiario ? (
+                        {currentView === 'about' && <AboutPage />}
+                        {currentView === 'contact' && <ContactPage />}
+
+                        {currentView === 'archive' && !currentDiario && (
                             <div className="animate-fade-in">
                                 <section className="mb-16 text-center md:text-left">
                                     <h2 className="text-4xl md:text-6xl font-bold mb-4 animate-slide-up">
@@ -350,8 +490,9 @@
                                     ))}
                                 </section>
                             </div>
-                        ) : (
-                            <div className="animate-fade-in">
+                        )}
+
+                        {currentView === 'archive' && currentDiario && (
                                 <section className="mb-8 flex items-center justify-between">
                                     <div>
                                         <button

@@ -153,14 +153,14 @@
                     <h1 className="text-xl md:text-2xl font-bold tracking-tight uppercase">EL GUARDIÁN</h1>
                 </div>
                 <nav className="hidden md:flex gap-8 text-sm font-medium text-slate-300">
-                    <button 
-                        onClick={onHome} 
+                    <button
+                        onClick={onHome}
                         className={`hover:text-brand transition-colors ${currentView === 'archive' && !currentDiario ? 'text-brand font-bold' : ''}`}
                     >
                         Inicio
                     </button>
-                    <button 
-                        onClick={() => onNavigate('about')} 
+                    <button
+                        onClick={() => onNavigate('about')}
                         className={`hover:text-brand transition-colors ${currentView === 'about' ? 'text-brand font-bold' : ''}`}
                     >
                         Quiénes Somos
@@ -169,7 +169,7 @@
                     {currentDiario && <button className="text-brand font-bold">{currentDiario.name}</button>}
                 </nav>
                 <div className="flex gap-4">
-                    <button 
+                    <button
                         onClick={() => onNavigate('contact')}
                         className={`bg-brand hover:bg-brand-dark px-6 py-2 rounded-full text-sm font-semibold transition-all shadow-lg shadow-brand/20 ${currentView === 'contact' ? 'ring-2 ring-white/50' : ''}`}
                     >
@@ -186,7 +186,7 @@
                         Quiénes <span className="gradient-text">Somos</span>
                     </h2>
                     <p className="text-slate-400 text-lg md:text-xl leading-relaxed">
-                        El Guardián es un proyecto periodístico escolar dedicado a informar con veracidad y compromiso. 
+                        El Guardián es un proyecto periodístico escolar dedicado a informar con veracidad y compromiso.
                         Nuestro equipo está conformado por estudiantes apasionados por la comunicación y la tecnología.
                     </p>
                 </section>
@@ -195,14 +195,14 @@
                     <div className="glass p-8 rounded-2xl border border-white/5">
                         <h3 className="text-2xl font-bold mb-4 text-brand">Nuestra Misión</h3>
                         <p className="text-slate-300">
-                            Fomentar el pensamiento crítico y la participación estudiantil a través de un periodismo ético y de calidad, 
+                            Fomentar el pensamiento crítico y la participación estudiantil a través de un periodismo ético y de calidad,
                             sirviendo como puente de comunicación en nuestra comunidad educativa.
                         </p>
                     </div>
                     <div className="glass p-8 rounded-2xl border border-white/5">
                         <h3 className="text-2xl font-bold mb-4 text-brand">Nuestra Visión</h3>
                         <p className="text-slate-300">
-                            Convertirnos en el referente digital de información escolar, integrando nuevas tecnologías 
+                            Convertirnos en el referente digital de información escolar, integrando nuevas tecnologías
                             para preservar la memoria histórica de nuestra institución.
                         </p>
                     </div>
@@ -297,7 +297,7 @@
         const DiarioCard = ({ diario, onClick }) => {
             const firstTomo = diario.tomos && diario.tomos.length > 0 ? diario.tomos[0] : null;
             const hasImageCover = firstTomo && !firstTomo.path.toLowerCase().endsWith('.pdf');
-            
+
             return (
                 <div
                     className="glass rounded-2xl overflow-hidden card-hover cursor-pointer group animate-slide-up"
@@ -405,6 +405,7 @@
             const [selectedTomo, setSelectedTomo] = useState(null);
             const [loading, setLoading] = useState(true);
             const [error, setError] = useState(null);
+            const [busqueda, setBusqueda] = useState("");
 
             useEffect(() => {
                 fetch('diarios.json')
@@ -478,31 +479,40 @@
                             />
                         )}
 
-                        {currentView === 'about' && <AboutPage />}
-                        {currentView === 'contact' && <ContactPage />}
-
                         {currentView === 'archive' && !currentDiario && (
-                            <div className="animate-fade-in">
-                                <section className="mb-16 text-center md:text-left">
-                                    <h2 className="text-4xl md:text-6xl font-bold mb-4 animate-slide-up">
-                                        Archivo <span className="gradient-text">Digital</span>
-                                    </h2>
-                                    <p className="text-slate-400 text-lg md:text-xl max-w-2xl animate-slide-up animate-delay-100">
-                                        Selecciona un diario para explorar sus ediciones y publicaciones.
-                                    </p>
+                            <div className="max-w-7xl mx-auto">
+
+                                <section className="mb-10 text-center">
+                                    <input
+                                        type="text"
+                                        placeholder="Buscar periódico..."
+                                        value={busqueda}
+                                        onChange={(e) => setBusqueda(e.target.value)}
+                                        className="w-full max-w-md mx-auto px-4 py-3 rounded-xl bg-slate-800 border border-slate-600 text-white"
+                                    />
                                 </section>
 
                                 <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                                    {diarios.map((diario, index) => (
-                                        <DiarioCard
-                                            key={index}
-                                            diario={diario}
-                                            onClick={setCurrentDiario}
-                                        />
-                                    ))}
+                                    {diarios
+                                        .filter((diario) =>
+                                            diario.name.toLowerCase().includes(busqueda.toLowerCase())
+                                        )
+                                        .map((diario, index) => (
+                                            <DiarioCard
+                                                key={index}
+                                                diario={diario}
+                                                onClick={setCurrentDiario}
+                                            />
+                                        ))}
                                 </section>
+
                             </div>
+
+
                         )}
+
+
+
 
                         {currentView === 'archive' && currentDiario && (
                             <div className="animate-fade-in">

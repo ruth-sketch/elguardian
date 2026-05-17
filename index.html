@@ -519,26 +519,13 @@
                                 <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                                     {diarios
                                         .filter((diario) => {
-
                                             const coincideBusqueda =
                                                 diario.name.toLowerCase().includes(busqueda.toLowerCase());
 
-                                            const categoriaDiario = (diario.categoria || "Sin categoria")
-                                                .normalize("NFD")
-                                                .replace(/[\u0300-\u036f]/g, "")
-                                                .trim()
-                                                .toLowerCase();
-
-                                            const categoriaSeleccionada = categoria
-                                                .normalize("NFD")
-                                                .replace(/[\u0300-\u036f]/g, "")
-                                                .trim()
-                                                .toLowerCase();
-
                                             const coincideCategoria =
-                                                categoriaSeleccionada === "todos" || categoriaDiario === categoriaSeleccionada;
-                                            return coincideBusqueda && coincideCategoria;
+                                                categoria === "Todos" || diario.categoria === categoria;
 
+                                            return coincideBusqueda && coincideCategoria;
                                         })
                                         .map((diario, index) => (
                                             <DiarioCard

@@ -468,8 +468,15 @@
                 const coincideBusqueda =
                     diario.name.toLowerCase().includes(texto);
 
+                const limpiar = (texto) =>
+                    (texto || "")
+                        .normalize("NFD")
+                        .replace(/[\u0300-\u036f]/g, "")
+                        .trim()
+                        .toLowerCase();
+
                 const coincideCategoria =
-                    categoria === "Todos" || diario.categoria === categoria;
+                    limpiar(categoria) === "todos" || limpiar(diario.categoria) === limpiar(categoria);
 
                 return coincideBusqueda && coincideCategoria;
             });

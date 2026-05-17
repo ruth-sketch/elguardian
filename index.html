@@ -523,27 +523,18 @@
                                     />
                                 </section>
                                 <p className="text-center text-slate-400 mb-6">
-                                    Categoría activa: {categoria} | Diarios cargados: {diarios.length}
+                                    Categoría activa: {categoria} | Diarios cargados: {diarios.length} | Mostrando: {diariosFiltrados.length}
                                 </p>
 
                                 <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                                    {diarios
-                                        .filter((diario) => {
-                                            const coincideBusqueda =
-                                                diario.name.toLowerCase().includes(busqueda.toLowerCase());
+                                    {diariosFiltrados.map((diario, index) => (
+                                        <DiarioCard
+                                            key={index}
+                                            diario={diario}
+                                            onClick={setCurrentDiario}
+                                        />
+                                    ))}
 
-                                            const coincideCategoria =
-                                                categoria === "Todos" || diario.categoria === categoria;
-
-                                            return coincideBusqueda && coincideCategoria;
-                                        })
-                                        .map((diario, index) => (
-                                            <DiarioCard
-                                                key={index}
-                                                diario={diario}
-                                                onClick={setCurrentDiario}
-                                            />
-                                        ))}
                                 </section>
 
                             </div>

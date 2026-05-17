@@ -462,7 +462,17 @@
                     </div>
                 );
             }
+            const diariosFiltrados = diarios.filter((diario) => {
+                const texto = busqueda.trim().toLowerCase();
 
+                const coincideBusqueda =
+                    diario.name.toLowerCase().includes(texto);
+
+                const coincideCategoria =
+                    categoria === "Todos" || diario.categoria === categoria;
+
+                return coincideBusqueda && coincideCategoria;
+            });
             return (
                 <div className="min-h-screen pb-20">
                     <Header

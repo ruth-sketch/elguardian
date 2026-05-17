@@ -520,10 +520,20 @@
                                             const coincideBusqueda =
                                                 diario.name.toLowerCase().includes(busqueda.toLowerCase());
 
-                                            const coincideCategoria =
-                                                categoria === "Todos" ||
-                                                (diario.categoria || "").trim().toLowerCase() === categoria.trim().toLowerCase();
+                                            const categoriaDiario = (diario.categoria || "Sin categoria")
+                                                .normalize("NFD")
+                                                .replace(/[\u0300-\u036f]/g, "")
+                                                .trim()
+                                                .toLowerCase();
 
+                                            const categoriaSeleccionada = categoria
+                                                .normalize("NFD")
+                                                .replace(/[\u0300-\u036f]/g, "")
+                                                .trim()
+                                                .toLowerCase();
+
+                                            const coincideCategoria =
+                                                categoriaSeleccionada === "todos" || categoriaDiario === categoriaSeleccionada;
                                             return coincideBusqueda && coincideCategoria;
 
                                         })

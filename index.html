@@ -462,24 +462,26 @@
                     </div>
                 );
             }
+            const limpiar = (texto) =>
+                String(texto || "")
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .trim()
+                    .toLowerCase();
+
             const diariosFiltrados = diarios.filter((diario) => {
-                const texto = busqueda.trim().toLowerCase();
+                const texto = limpiar(busqueda);
 
                 const coincideBusqueda =
-                    diario.name.toLowerCase().includes(texto);
-
-                const limpiar = (texto) =>
-                    (texto || "")
-                        .normalize("NFD")
-                        .replace(/[\u0300-\u036f]/g, "")
-                        .trim()
-                        .toLowerCase();
+                    limpiar(diario.name).includes(texto);
 
                 const coincideCategoria =
-                    limpiar(categoria) === "todos" || limpiar(diario.categoria) === limpiar(categoria);
+                    limpiar(categoria) === "todos" ||
+                    limpiar(diario.categoria) === limpiar(categoria);
 
                 return coincideBusqueda && coincideCategoria;
             });
+
             return (
                 <div className="min-h-screen pb-20">
                     <Header

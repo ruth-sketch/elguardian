@@ -409,7 +409,7 @@
             const [categoria, setCategoria] = useState("Todos");
 
             useEffect(() => {
-                fetch('diarios.json?v=' + Date.now())
+                fetch('diarios2.json?v=' + Date.now())
                     .then(res => {
                         if (!res.ok) throw new Error('No se pudo cargar la base de datos');
                         return res.json();

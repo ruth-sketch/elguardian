@@ -406,6 +406,7 @@
             const [loading, setLoading] = useState(true);
             const [error, setError] = useState(null);
             const [busqueda, setBusqueda] = useState("");
+            const [categoria, setCategoria] = useState("Todos");
 
             useEffect(() => {
                 fetch('diarios.json')
@@ -481,6 +482,26 @@
 
                         {currentView === 'archive' && !currentDiario && (
                             <div className="max-w-7xl mx-auto">
+                                <section className="mb-6 flex flex-wrap justify-center gap-3">
+
+                                    {["Todos", "Ambiente", "Ciencia", "Sociedad", "Tecnologia", "Actualidad", "Deportes"].map((cat) => (
+
+                                        <button
+                                            key={cat}
+                                            onClick={() => setCategoria(cat)}
+                                            className={`
+                px-4 py-2 rounded-full text-sm font-semibold transition-all
+                ${categoria === cat
+                                                    ? 'bg-brand text-white'
+                                                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}
+            `}
+                                        >
+                                            {cat}
+                                        </button>
+
+                                    ))}
+
+                                </section>
 
                                 <section className="mb-10 text-center">
                                     <input
@@ -494,9 +515,18 @@
 
                                 <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                                     {diarios
-                                        .filter((diario) =>
-                                            diario.name.toLowerCase().includes(busqueda.toLowerCase())
-                                        )
+                                        .filter((diario) => {
+
+                                            const coincideBusqueda =
+                                                diario.name.toLowerCase().includes(busqueda.toLowerCase());
+
+                                            const coincideCategoria =
+                                                categoria === "Todos" ||
+                                                (diario.categoria || "").trim().toLowerCase() === categoria.trim().toLowerCase();
+
+                                            return coincideBusqueda && coincideCategoria;
+
+                                        })
                                         .map((diario, index) => (
                                             <DiarioCard
                                                 key={index}

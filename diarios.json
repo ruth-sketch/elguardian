@@ -1,0 +1,397 @@
+[
+    {
+        "name": "el guardian",
+        "tomos": [
+            {
+                "name": "1.png",
+                "path": "diarios/el guardian/1.png"
+            },
+            {
+                "name": "2.png",
+                "path": "diarios/el guardian/2.png"
+            },
+            {
+                "name": "3.png",
+                "path": "diarios/el guardian/3.png"
+            },
+            {
+                "name": "4.png",
+                "path": "diarios/el guardian/4.png"
+            },
+            {
+                "name": "edicion_01_abril_2026.pdf",
+                "path": "diarios/el guardian/edicion_01_abril_2026.pdf"
+            }
+        ]
+    },
+    {
+        "name": "el universo",
+        "tomos": [
+            {
+                "name": "el_universo_1.png",
+                "path": "diarios/el universo/el_universo_1.png"
+            },
+            {
+                "name": "el_universo_2.jpeg",
+                "path": "diarios/el universo/el_universo_2.jpeg"
+            },
+            {
+                "name": "el_universo_3.jpeg",
+                "path": "diarios/el universo/el_universo_3.jpeg"
+            },
+            {
+                "name": "el_universo_4.jpeg",
+                "path": "diarios/el universo/el_universo_4.jpeg"
+            },
+            {
+                "name": "el_universo_5.jpeg",
+                "path": "diarios/el universo/el_universo_5.jpeg"
+            }
+        ]
+    },
+    {
+        "name": "el observador",
+        "tomos": [
+            {
+                "name": "1.jpeg",
+                "path": "diarios/el observador/1.jpeg"
+            },
+            {
+                "name": "2.jpeg",
+                "path": "diarios/el observador/2.jpeg"
+            },
+            {
+                "name": "3.jpeg",
+                "path": "diarios/el observador/3.jpeg"
+            },
+            {
+                "name": "El observador_20260422_085902_0000.pdf",
+                "path": "diarios/el observador/El observador_20260422_085902_0000.pdf"
+            }
+        ]
+    },
+    {
+        "name": "Deportes",
+        "tomos": [
+            {
+                "name": "1.jpeg",
+                "path": "diarios/Deportes/1.jpeg"
+            },
+            {
+                "name": "2.jpeg",
+                "path": "diarios/Deportes/2.jpeg"
+            }
+        ]
+    },
+    {
+        "name": "diario joven",
+        "tomos": [
+            {
+                "name": "Diario Joven.pdf",
+                "path": "diarios/diario joven/Diario Joven.pdf"
+            }
+        ]
+    },
+    {
+        "name": "el diario",
+        "tomos": [
+            {
+                "name": "WhatsApp Image 2026-04-24 at 10.39.09.jpeg",
+                "path": "diarios/el diario/WhatsApp Image 2026-04-24 at 10.39.09.jpeg"
+            }
+        ]
+    },
+    {
+        "name": "el escolar",
+        "tomos": [
+            {
+                "name": "euge1.0.png",
+                "path": "diarios/el escolar/euge1.0.png"
+            },
+            {
+                "name": "euge3.png",
+                "path": "diarios/el escolar/euge3.png"
+            },
+            {
+                "name": "eugee2.pdf",
+                "path": "diarios/el escolar/eugee2.pdf"
+            }
+        ]
+    },
+    {
+        "name": "el espectador",
+        "tomos": [
+            {
+                "name": "el espectador.pdf",
+                "path": "diarios/el espectador/el espectador.pdf"
+            }
+        ]
+    },
+    {
+        "name": "el guardianIII",
+        "tomos": [
+            {
+                "name": "El guardian.pdf",
+                "path": "diarios/el guardianIII/El guardian.pdf"
+            },
+            {
+                "name": "Encuestas Estudiantil.pdf",
+                "path": "diarios/el guardianIII/Encuestas Estudiantil.pdf"
+            }
+        ]
+    },
+    {
+        "name": "el horizonte",
+        "tomos": [
+            {
+                "name": "el horizonte.pdf",
+                "path": "diarios/el horizonte/el horizonte.pdf"
+            }
+        ]
+    },
+    {
+        "name": "el informador",
+        "tomos": [
+            {
+                "name": "el informador.pdf",
+                "path": "diarios/el informador/el informador.pdf"
+            }
+        ]
+    },
+    {
+        "name": "el migrante",
+        "tomos": [
+            {
+                "name": "ESTAS COSITAS.png",
+                "path": "diarios/el migrante/ESTAS COSITAS.png"
+            },
+            {
+                "name": "El migrante.pdf",
+                "path": "diarios/el migrante/El migrante.pdf"
+            }
+        ]
+    },
+    {
+        "name": "el observador II",
+        "tomos": [
+            {
+                "name": "1.jpeg",
+                "path": "diarios/el observador II/1.jpeg"
+            },
+            {
+                "name": "2.jpeg",
+                "path": "diarios/el observador II/2.jpeg"
+            },
+            {
+                "name": "3.jpeg",
+                "path": "diarios/el observador II/3.jpeg"
+            },
+            {
+                "name": "4.jpeg",
+                "path": "diarios/el observador II/4.jpeg"
+            }
+        ]
+    },
+    {
+        "name": "el otoño",
+        "tomos": [
+            {
+                "name": "Edición N°1 EL GUARDIÁN “La noticia bajo vigilancia” 4page.pdf_20260422_151211_0000 (1).pdf",
+                "path": "diarios/el otoño/Edición N°1 EL GUARDIÁN “La noticia bajo vigilancia” 4page.pdf_20260422_151211_0000 (1).pdf"
+            },
+            {
+                "name": "Edición N°1 EL GUARDIÁN “La noticia bajo vigilancia” 4page.pdf_20260422_151211_0000.pdf",
+                "path": "diarios/el otoño/Edición N°1 EL GUARDIÁN “La noticia bajo vigilancia” 4page.pdf_20260422_151211_0000.pdf"
+            }
+        ]
+    },
+    {
+        "name": "el vigia",
+        "tomos": [
+            {
+                "name": "1.jpeg",
+                "path": "diarios/el vigia/1.jpeg"
+            }
+        ]
+    },
+    {
+        "name": "generacion ia",
+        "tomos": [
+            {
+                "name": "Generación IA.pdf",
+                "path": "diarios/generacion ia/Generación IA.pdf"
+            }
+        ]
+    },
+    {
+        "name": "la noche",
+        "tomos": [
+            {
+                "name": "EDICION 16 LA NOCHE DE LOS LAPICES.pdf",
+                "path": "diarios/la noche/EDICION 16 LA NOCHE DE LOS LAPICES.pdf"
+            }
+        ]
+    },
+    {
+        "name": "La postal",
+        "tomos": [
+            {
+                "name": "1.jpeg",
+                "path": "diarios/La postal/1.jpeg"
+            },
+            {
+                "name": "2.jpeg",
+                "path": "diarios/La postal/2.jpeg"
+            },
+            {
+                "name": "3.jpeg",
+                "path": "diarios/La postal/3.jpeg"
+            }
+        ]
+    },
+    {
+        "name": "la sierra",
+        "tomos": [
+            {
+                "name": "1.jpeg",
+                "path": "diarios/la sierra/1.jpeg"
+            },
+            {
+                "name": "2.jpeg",
+                "path": "diarios/la sierra/2.jpeg"
+            },
+            {
+                "name": "3.jpeg",
+                "path": "diarios/la sierra/3.jpeg"
+            },
+            {
+                "name": "4.jpeg",
+                "path": "diarios/la sierra/4.jpeg"
+            }
+        ]
+    },
+    {
+        "name": "la voz del tiempo",
+        "tomos": [
+            {
+                "name": "1.jpeg",
+                "path": "diarios/la voz del tiempo/1.jpeg"
+            },
+            {
+                "name": "2.jpeg",
+                "path": "diarios/la voz del tiempo/2.jpeg"
+            },
+            {
+                "name": "3.jpeg",
+                "path": "diarios/la voz del tiempo/3.jpeg"
+            },
+            {
+                "name": "4.jpeg",
+                "path": "diarios/la voz del tiempo/4.jpeg"
+            },
+            {
+                "name": "5.jpeg",
+                "path": "diarios/la voz del tiempo/5.jpeg"
+            },
+            {
+                "name": "6.jpeg",
+                "path": "diarios/la voz del tiempo/6.jpeg"
+            }
+        ]
+    },
+    {
+        "name": "miradas locales",
+        "tomos": [
+            {
+                "name": "Periódico ANGELES BIFFE 3F.pdf",
+                "path": "diarios/miradas locales/Periódico ANGELES BIFFE 3F.pdf"
+            }
+        ]
+    },
+    {
+        "name": "mundo tecnologico",
+        "tomos": [
+            {
+                "name": "merged.pdf",
+                "path": "diarios/mundo tecnologico/merged.pdf"
+            }
+        ]
+    },
+    {
+        "name": "polinforma",
+        "tomos": [
+            {
+                "name": "1.jpeg",
+                "path": "diarios/polinforma/1.jpeg"
+            },
+            {
+                "name": "2.jpeg",
+                "path": "diarios/polinforma/2.jpeg"
+            },
+            {
+                "name": "3.jpeg",
+                "path": "diarios/polinforma/3.jpeg"
+            },
+            {
+                "name": "4.jpeg",
+                "path": "diarios/polinforma/4.jpeg"
+            },
+            {
+                "name": "5.jpeg",
+                "path": "diarios/polinforma/5.jpeg"
+            }
+        ]
+    },
+    {
+        "name": "prueba_borrar",
+        "tomos": [
+            {
+                "name": "Argentina consolida su presencia en la vanguardiadelatecnologíaespacialatravésde lamisiónArtemis .Aunquelatripulaciónno cuenta con astronautas argentinos, el país aportacerebroytecnologíapropiamed.pdf",
+                "path": "diarios/prueba_borrar/Argentina consolida su presencia en la vanguardiadelatecnologíaespacialatravésde lamisiónArtemis .Aunquelatripulaciónno cuenta con astronautas argentinos, el país aportacerebroytecnologíapropiamed.pdf"
+            }
+        ]
+    },
+    {
+        "name": "Represa Yacyretá",
+        "tomos": [
+            {
+                "name": "1.jpeg",
+                "path": "diarios/Represa Yacyretá/1.jpeg"
+            },
+            {
+                "name": "2.jpeg",
+                "path": "diarios/Represa Yacyretá/2.jpeg"
+            },
+            {
+                "name": "3.jpeg",
+                "path": "diarios/Represa Yacyretá/3.jpeg"
+            }
+        ]
+    },
+    {
+        "name": "rugby",
+        "tomos": [
+            {
+                "name": "1.png",
+                "path": "diarios/rugby/1.png"
+            },
+            {
+                "name": "2.jpeg",
+                "path": "diarios/rugby/2.jpeg"
+            },
+            {
+                "name": "3.jpeg",
+                "path": "diarios/rugby/3.jpeg"
+            }
+        ]
+    },
+    {
+        "name": "el guardian II",
+        "tomos": [
+            {
+                "name": "El guardian_20260430_012439_0000.pdf",
+                "path": "diarios/el guardian II/El guardian_20260430_012439_0000.pdf"
+            }
+        ]
+    }
+]

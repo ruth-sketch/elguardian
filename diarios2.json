@@ -34,12 +34,12 @@
                 "path": "diarios/el universo/el_universo_1.png"
             },
             {
-                "name": "el_universo_2.jpeg",
-                "path": "diarios/el universo/el_universo_2.jpeg"
+                "name": "el_universo_2.jpng",
+                "path": "diarios/el universo/el_universo_2.png"
             },
             {
-                "name": "el_universo_3.jpeg",
-                "path": "diarios/el universo/el_universo_3.jpeg"
+                "name": "el_universo_3.png",
+                "path": "diarios/el universo/el_universo_3.png"
             },
             {
                 "name": "el_universo_4.jpeg",
@@ -56,8 +56,8 @@
         "categoria": "ciencia",
         "tomos": [
             {
-                "name": "1.jpeg",
-                "path": "diarios/el observador/1.jpeg"
+                "name": "1.png",
+                "path": "diarios/el observador/1.png"
             },
             {
                 "name": "2.jpeg",

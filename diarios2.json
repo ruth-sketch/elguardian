@@ -421,6 +421,7 @@
     {
         "name": "el guardian II",
         "categoria": "deportes",
+        "portada": "diarios/el guardian II/1.jpeg",
         "tomos": [
             {
                 "name": "El guardian_20260430_012439_0000.pdf",

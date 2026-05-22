@@ -138,14 +138,27 @@
     {
         "name": "el guardianIII",
         "categoria": "ciencia",
+        "portada": "diarios/el guardianIII/1.jpeg",
         "tomos": [
+            {
+                "name": "1.jpeg",
+                "path": "diarios/el guardianIII/1.jpeg"
+            },
+            {
+                "name": "2.jpeg",
+                "path": "diarios/el guardianIII/2.jpeg"
+            },
+            {
+                "name": "3.jpeg",
+                "path": "diarios/el guardianIII/3.jpeg"
+            },
+            {
+                "name": "4.jpeg",
+                "path": "diarios/el guardianIII/4.jpeg"
+            },
             {
                 "name": "El guardian.pdf",
                 "path": "diarios/el guardianIII/El guardian.pdf"
-            },
-            {
-                "name": "Encuestas Estudiantil.pdf",
-                "path": "diarios/el guardianIII/Encuestas Estudiantil.pdf"
             }
         ]
     },

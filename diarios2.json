@@ -421,11 +421,23 @@
     {
         "name": "el guardian II",
         "categoria": "deportes",
-        "portada": "diarios/el guardian II/1.jpeg",
+        "portada": "diarios/el guardian II/1.png",
         "tomos": [
             {
-                "name": "El guardian_20260430_012439_0000.pdf",
-                "path": "diarios/el guardian II/El guardian_20260430_012439_0000.pdf"
+                "name": "1.png",
+                "path": "diarios/el guardian II/1.png"
+            },
+            {
+                "name": "2.png",
+                "path": "diarios/el guardian II/2.png"
+            },
+            {
+                "name": "3.png",
+                "path": "diarios/el guardian II/3.png"
+            },
+            {
+                "name": "4.png",
+                "path": "diarios/el guardian II/4.png"
             }
         ]
     }

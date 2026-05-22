@@ -32,12 +32,12 @@
                 "path": "diarios/el universo/el_universo_1.png"
             },
             {
-                "name": "el_universo_2.jpeg",
-                "path": "diarios/el universo/el_universo_2.jpeg"
+                "name": "el_universo_2.png",
+                "path": "diarios/el universo/el_universo_2.png"
             },
             {
-                "name": "el_universo_3.jpeg",
-                "path": "diarios/el universo/el_universo_3.jpeg"
+                "name": "el_universo_3.png",
+                "path": "diarios/el universo/el_universo_3.png"
             },
             {
                 "name": "el_universo_4.jpeg",
@@ -53,8 +53,8 @@
         "name": "el observador",
         "tomos": [
             {
-                "name": "1.jpeg",
-                "path": "diarios/el observador/1.jpeg"
+                "name": "1.png",
+                "path": "diarios/el observador/1.png"
             },
             {
                 "name": "2.jpeg",
@@ -131,6 +131,22 @@
         "name": "el guardianIII",
         "tomos": [
             {
+                "name": "1.jpeg",
+                "path": "diarios/el guardianIII/1.jpeg"
+            },
+            {
+                "name": "2.jpeg",
+                "path": "diarios/el guardianIII/2.jpeg"
+            },
+            {
+                "name": "3.jpeg",
+                "path": "diarios/el guardianIII/3.jpeg"
+            },
+            {
+                "name": "4.jpeg",
+                "path": "diarios/el guardianIII/4.jpeg"
+            },
+            {
                 "name": "El guardian.pdf",
                 "path": "diarios/el guardianIII/El guardian.pdf"
             },
@@ -146,6 +162,10 @@
             {
                 "name": "el horizonte.pdf",
                 "path": "diarios/el horizonte/el horizonte.pdf"
+            },
+            {
+                "name": "el horizonte2.pdf",
+                "path": "diarios/el horizonte/el horizonte2.pdf"
             }
         ]
     },
@@ -303,8 +323,16 @@
         "name": "miradas locales",
         "tomos": [
             {
+                "name": "1.jpeg",
+                "path": "diarios/miradas locales/1.jpeg"
+            },
+            {
                 "name": "Periódico ANGELES BIFFE 3F.pdf",
                 "path": "diarios/miradas locales/Periódico ANGELES BIFFE 3F.pdf"
+            },
+            {
+                "name": "datos de fotos D.G 2026.pdf",
+                "path": "diarios/miradas locales/datos de fotos D.G 2026.pdf"
             }
         ]
     },
@@ -388,6 +416,10 @@
     {
         "name": "el guardian II",
         "tomos": [
+            {
+                "name": "1.jpeg",
+                "path": "diarios/el guardian II/1.jpeg"
+            },
             {
                 "name": "El guardian_20260430_012439_0000.pdf",
                 "path": "diarios/el guardian II/El guardian_20260430_012439_0000.pdf"

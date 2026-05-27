@@ -2,6 +2,27 @@ import os
 import json
 
 def scan_diarios(base_path):
+    # Load existing metadata (categories and portadas)
+    metadata = {}
+    for filename in ['diarios.json']:
+        filepath = os.path.join(base_path, filename)
+        if os.path.exists(filepath):
+            try:
+                with open(filepath, 'r', encoding='utf-8') as f:
+                    old_data = json.load(f)
+                    for item in old_data:
+                        name = item.get('name')
+                        if name:
+                            name_lower = name.lower()
+                            if name_lower not in metadata:
+                                metadata[name_lower] = {}
+                            if item.get('categoria'):
+                                metadata[name_lower]['categoria'] = item.get('categoria')
+                            if item.get('portada'):
+                                metadata[name_lower]['portada'] = item.get('portada')
+            except Exception as e:
+                print(f"Warning: Error loading {filename}: {e}")
+
     diarios = []
     diarios_dir = os.path.join(base_path, 'diarios')
     
@@ -23,10 +44,23 @@ def scan_diarios(base_path):
                     })
             
             if tomo_files:
-                diarios.append({
+                name_lower = folder_name.lower()
+                diario_item = {
                     "name": folder_name,
-                    "tomos": tomo_files
-                })
+                }
+                
+                # Merge metadata
+                categoria = metadata.get(name_lower, {}).get('categoria')
+                if not categoria:
+                    categoria = "actualidad"
+                diario_item["categoria"] = categoria
+                
+                portada = metadata.get(name_lower, {}).get('portada')
+                if portada:
+                    diario_item["portada"] = portada
+                
+                diario_item["tomos"] = tomo_files
+                diarios.append(diario_item)
     
     # Custom Sort: 'el guardian' 1st, 'el universo' 2nd, 'el observador' 3rd, then rest alphabetically
     priority = {

@@ -1,6 +1,7 @@
 [
     {
         "name": "el guardian",
+        "categoria": "ciencia",
         "tomos": [
             {
                 "name": "1.png",
@@ -26,6 +27,7 @@
     },
     {
         "name": "el universo",
+        "categoria": "deportes",
         "tomos": [
             {
                 "name": "el_universo_1.png",
@@ -51,6 +53,7 @@
     },
     {
         "name": "el observador",
+        "categoria": "ciencia",
         "tomos": [
             {
                 "name": "1.png",
@@ -72,6 +75,7 @@
     },
     {
         "name": "Deportes",
+        "categoria": "deportes",
         "tomos": [
             {
                 "name": "1.jpeg",
@@ -85,6 +89,7 @@
     },
     {
         "name": "diario joven",
+        "categoria": "tecnologia",
         "tomos": [
             {
                 "name": "Diario Joven.pdf",
@@ -94,6 +99,7 @@
     },
     {
         "name": "el diario",
+        "categoria": "actualidad",
         "tomos": [
             {
                 "name": "WhatsApp Image 2026-04-24 at 10.39.09.jpeg",
@@ -103,6 +109,7 @@
     },
     {
         "name": "el escolar",
+        "categoria": "sociedad",
         "tomos": [
             {
                 "name": "euge1.0.png",
@@ -120,6 +127,7 @@
     },
     {
         "name": "el espectador",
+        "categoria": "ambiente",
         "tomos": [
             {
                 "name": "el espectador.pdf",
@@ -129,6 +137,8 @@
     },
     {
         "name": "el guardianIII",
+        "categoria": "ciencia",
+        "portada": "diarios/el guardianIII/1.jpeg",
         "tomos": [
             {
                 "name": "1.jpeg",
@@ -158,6 +168,7 @@
     },
     {
         "name": "el horizonte",
+        "categoria": "actualidad",
         "tomos": [
             {
                 "name": "el horizonte.pdf",
@@ -171,6 +182,7 @@
     },
     {
         "name": "el informador",
+        "categoria": "ambiente",
         "tomos": [
             {
                 "name": "el informador.pdf",
@@ -180,6 +192,7 @@
     },
     {
         "name": "el migrante",
+        "categoria": "sociedad",
         "tomos": [
             {
                 "name": "ESTAS COSITAS.png",
@@ -193,6 +206,7 @@
     },
     {
         "name": "el observador II",
+        "categoria": "sociedad",
         "tomos": [
             {
                 "name": "1.jpeg",
@@ -214,6 +228,7 @@
     },
     {
         "name": "el otoño",
+        "categoria": "ambiente",
         "tomos": [
             {
                 "name": "Edición N°1 EL GUARDIÁN “La noticia bajo vigilancia” 4page.pdf_20260422_151211_0000 (1).pdf",
@@ -227,6 +242,7 @@
     },
     {
         "name": "el vigia",
+        "categoria": "ambiente",
         "tomos": [
             {
                 "name": "1.jpeg",
@@ -236,6 +252,7 @@
     },
     {
         "name": "generacion ia",
+        "categoria": "tecnologia",
         "tomos": [
             {
                 "name": "Generación IA.pdf",
@@ -245,6 +262,7 @@
     },
     {
         "name": "la noche",
+        "categoria": "sociedad",
         "tomos": [
             {
                 "name": "EDICION 16 LA NOCHE DE LOS LAPICES.pdf",
@@ -254,6 +272,7 @@
     },
     {
         "name": "La postal",
+        "categoria": "sociedad",
         "tomos": [
             {
                 "name": "1.jpeg",
@@ -271,6 +290,7 @@
     },
     {
         "name": "la sierra",
+        "categoria": "sociedad",
         "tomos": [
             {
                 "name": "1.jpeg",
@@ -292,6 +312,7 @@
     },
     {
         "name": "la voz del tiempo",
+        "categoria": "sociedad",
         "tomos": [
             {
                 "name": "1.jpeg",
@@ -321,6 +342,7 @@
     },
     {
         "name": "miradas locales",
+        "categoria": "actualidad",
         "tomos": [
             {
                 "name": "1.jpeg",
@@ -338,6 +360,7 @@
     },
     {
         "name": "mundo tecnologico",
+        "categoria": "tecnologia",
         "tomos": [
             {
                 "name": "merged.pdf",
@@ -347,6 +370,7 @@
     },
     {
         "name": "polinforma",
+        "categoria": "actualidad",
         "tomos": [
             {
                 "name": "1.jpeg",
@@ -372,6 +396,7 @@
     },
     {
         "name": "prueba_borrar",
+        "categoria": "actualidad",
         "tomos": [
             {
                 "name": "Argentina consolida su presencia en la vanguardiadelatecnologíaespacialatravésde lamisiónArtemis .Aunquelatripulaciónno cuenta con astronautas argentinos, el país aportacerebroytecnologíapropiamed.pdf",
@@ -381,6 +406,7 @@
     },
     {
         "name": "Represa Yacyretá",
+        "categoria": "ambiente",
         "tomos": [
             {
                 "name": "1.jpeg",
@@ -398,6 +424,7 @@
     },
     {
         "name": "rugby",
+        "categoria": "deportes",
         "tomos": [
             {
                 "name": "1.png",
@@ -415,6 +442,8 @@
     },
     {
         "name": "el guardian II",
+        "categoria": "deportes",
+        "portada": "diarios/el guardian II/1.png",
         "tomos": [
             {
                 "name": "1.png",

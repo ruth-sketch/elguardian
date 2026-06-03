@@ -1,0 +1,80 @@
+[
+    {
+        "name": "ferias francas",
+        "categoria": "territorio",
+        "tomos": [
+            {
+                "name": "1.png",
+                "path": "mas/territorio/ferias francas/1.png"
+            },
+            {
+                "name": "2.png",
+                "path": "mas/territorio/ferias francas/2.png"
+            },
+            {
+                "name": "3.png",
+                "path": "mas/territorio/ferias francas/3.png"
+            },
+            {
+                "name": "4.png",
+                "path": "mas/territorio/ferias francas/4.png"
+            },
+            {
+                "name": "5.png",
+                "path": "mas/territorio/ferias francas/5.png"
+            },
+            {
+                "name": "6.png",
+                "path": "mas/territorio/ferias francas/6.png"
+            },
+            {
+                "name": "7.png",
+                "path": "mas/territorio/ferias francas/7.png"
+            },
+            {
+                "name": "8.png",
+                "path": "mas/territorio/ferias francas/8.png"
+            },
+            {
+                "name": "9.png",
+                "path": "mas/territorio/ferias francas/9.png"
+            }
+        ]
+    },
+    {
+        "name": "ilustraciones",
+        "categoria": "ilustraciones",
+        "tomos": [
+            {
+                "name": "1.png",
+                "path": "mas/ilustraciones/1.png"
+            },
+            {
+                "name": "2.png",
+                "path": "mas/ilustraciones/2.png"
+            },
+            {
+                "name": "4 (1).jpeg",
+                "path": "mas/ilustraciones/4 (1).jpeg"
+            },
+            {
+                "name": "4 (2).jpeg",
+                "path": "mas/ilustraciones/4 (2).jpeg"
+            }
+        ]
+    },
+    {
+        "name": "URBANA",
+        "categoria": "interior_design",
+        "tomos": [
+            {
+                "name": "1.png",
+                "path": "mas/interior_design/URBANA/1.png"
+            },
+            {
+                "name": "2.png",
+                "path": "mas/interior_design/URBANA/2.png"
+            }
+        ]
+    }
+]

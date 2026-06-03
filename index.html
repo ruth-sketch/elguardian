@@ -155,9 +155,15 @@
                 <nav className="hidden md:flex gap-8 text-sm font-medium text-slate-300">
                     <button
                         onClick={onHome}
-                        className={`hover:text-brand transition-colors ${currentView === 'archive' && !currentDiario ? 'text-brand font-bold' : ''}`}
+                        className={`hover:text-brand transition-colors ${currentView === 'archive' ? 'text-brand font-bold' : ''}`}
                     >
                         Inicio
+                    </button>
+                    <button
+                        onClick={() => onNavigate('mas')}
+                        className={`hover:text-brand transition-colors ${currentView === 'mas' ? 'text-brand font-bold' : ''}`}
+                    >
+                        Más
                     </button>
                     <button
                         onClick={() => onNavigate('about')}
@@ -166,7 +172,7 @@
                         Quiénes Somos
                     </button>
                     {currentDiario && <span className="text-slate-600">/</span>}
-                    {currentDiario && <button className="text-brand font-bold">{currentDiario.name}</button>}
+                    {currentDiario && <button className="text-brand font-bold capitalize">{currentDiario.name}</button>}
                 </nav>
                 <div className="flex gap-4">
                     <button
@@ -294,9 +300,10 @@
             </div>
         );
 
-        const DiarioCard = ({ diario, onClick }) => {
+        const DiarioCard = ({ diario, onClick, isMas }) => {
             const firstTomo = diario.tomos && diario.tomos.length > 0 ? diario.tomos[0] : null;
-            const hasImageCover = firstTomo && !firstTomo.path.toLowerCase().endsWith('.pdf');
+            const coverPath = diario.portada || (firstTomo ? firstTomo.path : null);
+            const hasImageCover = coverPath && !coverPath.toLowerCase().endsWith('.pdf');
 
             return (
                 <div
@@ -306,7 +313,7 @@
                     <div className="aspect-video overflow-hidden relative bg-slate-800 flex items-center justify-center">
                         {hasImageCover ? (
                             <img
-                                src={firstTomo.path}
+                                src={coverPath}
                                 alt={diario.name}
                                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                             />
@@ -316,17 +323,17 @@
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60"></div>
                         <div className="absolute bottom-4 left-4 right-4">
                             <span className="bg-brand text-[10px] uppercase font-bold px-2 py-1 rounded mb-2 inline-block tracking-wider shadow-sm">
-                                {diario.tomos.length} Tomos
+                                {diario.tomos.length} {isMas ? 'Archivos' : 'Tomos'}
                             </span>
                             <h3 className="text-2xl font-bold capitalize">{diario.name}</h3>
                         </div>
                     </div>
                     <div className="p-5">
                         <p className="text-slate-400 text-sm mb-4 line-clamp-2 italic">
-                            Explora las ediciones de {diario.name}.
+                            {isMas ? `Explora los archivos de ${diario.name}.` : `Explora las ediciones de ${diario.name}.`}
                         </p>
                         <button className="text-brand font-semibold text-sm flex items-center gap-2 group/btn">
-                            Ver Tomos
+                            {isMas ? 'Ver Archivos' : 'Ver Tomos'}
                             <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
                         </button>
                     </div>
@@ -400,7 +407,8 @@
 
         const App = () => {
             const [diarios, setDiarios] = useState([]);
-            const [currentView, setCurrentView] = useState('archive'); // 'archive', 'about', 'contact'
+            const [masItems, setMasItems] = useState([]);
+            const [currentView, setCurrentView] = useState('archive'); // 'archive', 'mas', 'about', 'contact'
             const [currentDiario, setCurrentDiario] = useState(null);
             const [selectedTomo, setSelectedTomo] = useState(null);
             const [loading, setLoading] = useState(true);
@@ -409,32 +417,42 @@
             const [categoria, setCategoria] = useState("Todos");
 
             useEffect(() => {
-                fetch('diarios.json?v=' + Date.now())
-                    .then(res => {
-                        if (!res.ok) throw new Error('No se pudo cargar la base de datos');
+                Promise.all([
+                    fetch('diarios.json?v=' + Date.now()).then(res => {
+                        if (!res.ok) throw new Error('No se pudo cargar la base de datos de Diarios');
+                        return res.json();
+                    }),
+                    fetch('mas.json?v=' + Date.now()).then(res => {
+                        if (!res.ok) throw new Error('No se pudo cargar la base de datos de Más');
                         return res.json();
                     })
-                    .then(data => {
-                        setDiarios(data);
-                        setLoading(false);
-                    })
-                    .catch(err => {
-                        console.error(err);
-                        setError(err.message);
-                        setLoading(false);
-                    });
+                ])
+                .then(([diariosData, masData]) => {
+                    setDiarios(diariosData);
+                    setMasItems(masData);
+                    setLoading(false);
+                })
+                .catch(err => {
+                    console.error(err);
+                    setError(err.message);
+                    setLoading(false);
+                });
             }, []);
 
             const handleHome = () => {
                 setSelectedTomo(null);
                 setCurrentDiario(null);
                 setCurrentView('archive');
+                setBusqueda("");
+                setCategoria("Todos");
             };
 
             const handleNavigate = (view) => {
                 setSelectedTomo(null);
                 setCurrentDiario(null);
                 setCurrentView(view);
+                setBusqueda("");
+                setCategoria("Todos");
             };
 
             if (loading) {
@@ -469,7 +487,15 @@
                     .trim()
                     .toLowerCase();
 
-            const diariosFiltrados = diarios.filter((diario) => {
+            const itemsActivos = currentView === 'mas' ? masItems : diarios;
+
+            const categoriasDisponibles = React.useMemo(() => {
+                const items = currentView === 'mas' ? masItems : diarios;
+                const cats = new Set(items.map(item => item.categoria).filter(Boolean));
+                return ["Todos", ...Array.from(cats).sort()];
+            }, [currentView, diarios, masItems]);
+
+            const diariosFiltrados = itemsActivos.filter((diario) => {
                 const texto = limpiar(busqueda);
 
                 const coincideBusqueda =
@@ -499,44 +525,41 @@
                             />
                         )}
 
-                        {currentView === 'archive' && !currentDiario && (
+                        {currentView === 'about' && <AboutPage />}
+                        {currentView === 'contact' && <ContactPage />}
+
+                        {(currentView === 'archive' || currentView === 'mas') && !currentDiario && (
                             <div className="max-w-7xl mx-auto">
                                 <section className="mb-6 flex flex-wrap justify-center gap-3">
-
-                                    {["Todos", "ambiente", "ciencia", "sociedad", "tecnologia", "actualidad", "deportes"].map((cat) => (
-
+                                    {categoriasDisponibles.map((cat) => (
                                         <button
                                             key={cat}
                                             onClick={() => setCategoria(cat)}
                                             className={`
-                px-4 py-2 rounded-full text-sm font-semibold transition-all
-                ${categoria === cat
+                                                px-4 py-2 rounded-full text-sm font-semibold transition-all capitalize
+                                                ${categoria === cat
                                                     ? 'bg-brand text-white'
                                                     : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}
-            `}
+                                            `}
                                         >
                                             {cat}
                                         </button>
-
                                     ))}
-
                                 </section>
 
                                 <section className="mb-10 text-center">
                                     <input
                                         type="text"
-                                        placeholder="Buscar periódico..."
+                                        placeholder={currentView === 'mas' ? "Buscar contenido..." : "Buscar periódico..."}
                                         value={busqueda}
                                         onChange={(e) => setBusqueda(e.target.value)}
                                         className="w-full max-w-md mx-auto px-4 py-3 rounded-xl bg-slate-800 border border-slate-600 text-white"
                                     />
                                 </section>
-                                <p className="text-center text-slate-400 mb-6">
-                                    Categoría activa: {categoria} |
-                                    Diarios cargados: {diarios.length} |
-                                    Mostrando: {diariosFiltrados.length} |
-                                    Categoria seleccionada limpia: {limpiar(categoria)} |
-                                    Primera categoria JSON: {limpiar(diarios[0]?.categoria)}
+                                <p className="text-center text-slate-400 mb-6 text-sm">
+                                    Categoría activa: <span className="capitalize">{categoria}</span> |
+                                    {currentView === 'mas' ? 'Elementos' : 'Diarios'} cargados: {itemsActivos.length} |
+                                    Mostrando: {diariosFiltrados.length}
                                 </p>
                                 <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                                     {diariosFiltrados.map((diario, index) => (
@@ -544,20 +567,14 @@
                                             key={index}
                                             diario={diario}
                                             onClick={setCurrentDiario}
+                                            isMas={currentView === 'mas'}
                                         />
                                     ))}
-
                                 </section>
-
                             </div>
-
-
                         )}
 
-
-
-
-                        {currentView === 'archive' && currentDiario && (
+                        {(currentView === 'archive' || currentView === 'mas') && currentDiario && (
                             <div className="animate-fade-in">
                                 <section className="mb-8 flex items-center justify-between">
                                     <div>
@@ -565,7 +582,7 @@
                                             onClick={() => setCurrentDiario(null)}
                                             className="text-brand hover:underline text-sm mb-2 block"
                                         >
-                                            ← Volver a Diarios
+                                            {currentView === 'mas' ? '← Volver a Más' : '← Volver a Diarios'}
                                         </button>
                                         <h2 className="text-3xl md:text-5xl font-bold capitalize">
                                             {currentDiario.name}
@@ -573,7 +590,7 @@
                                     </div>
                                     <div className="bg-slate-800/50 px-4 py-2 rounded-xl border border-white/5">
                                         <span className="text-slate-400 text-sm font-medium">
-                                            {currentDiario.tomos.length} Ediciones encontradas
+                                            {currentDiario.tomos.length} {currentView === 'mas' ? 'Archivos' : 'Ediciones'} encontrados
                                         </span>
                                     </div>
                                 </section>

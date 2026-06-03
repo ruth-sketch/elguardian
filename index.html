@@ -448,7 +448,32 @@
                 });
             }, []);
 
+            const limpiar = React.useCallback((texto) =>
+                String(texto || "")
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .trim()
+                    .toLowerCase()
+            , []);
 
+            const categoriasDisponibles = React.useMemo(() => {
+                const items = currentView === 'mas' ? masItems : diarios;
+                const cats = new Set(items.map(item => item.categoria).filter(Boolean));
+                return ["Todos", ...Array.from(cats).sort()];
+            }, [currentView, diarios, masItems]);
+
+            const itemsActivos = currentView === 'mas' ? masItems : diarios;
+
+            const diariosFiltrados = React.useMemo(() => {
+                return itemsActivos.filter((diario) => {
+                    const texto = limpiar(busqueda);
+                    const coincideBusqueda = limpiar(diario.name).includes(texto);
+                    const coincideCategoria =
+                        limpiar(categoria) === "todos" ||
+                        limpiar(diario.categoria) === limpiar(categoria);
+                    return coincideBusqueda && coincideCategoria;
+                });
+            }, [itemsActivos, busqueda, categoria, limpiar]);
 
             const handleHome = () => {
                 setSelectedTomo(null);
@@ -491,33 +516,6 @@
                     </div>
                 );
             }
-            const limpiar = (texto) =>
-                String(texto || "")
-                    .normalize("NFD")
-                    .replace(/[\u0300-\u036f]/g, "")
-                    .trim()
-                    .toLowerCase();
-
-            const itemsActivos = currentView === 'mas' ? masItems : diarios;
-
-            const categoriasDisponibles = React.useMemo(() => {
-                const items = currentView === 'mas' ? masItems : diarios;
-                const cats = new Set(items.map(item => item.categoria).filter(Boolean));
-                return ["Todos", ...Array.from(cats).sort()];
-            }, [currentView, diarios, masItems]);
-
-            const diariosFiltrados = itemsActivos.filter((diario) => {
-                const texto = limpiar(busqueda);
-
-                const coincideBusqueda =
-                    limpiar(diario.name).includes(texto);
-
-                const coincideCategoria =
-                    limpiar(categoria) === "todos" ||
-                    limpiar(diario.categoria) === limpiar(categoria);
-
-                return coincideBusqueda && coincideCategoria;
-            });
 
             return (
                 <div className="min-h-screen pb-20">

@@ -448,32 +448,28 @@
                 });
             }, []);
 
-            const limpiar = React.useCallback((texto) =>
+            const limpiar = (texto) =>
                 String(texto || "")
                     .normalize("NFD")
                     .replace(/[\u0300-\u036f]/g, "")
                     .trim()
-                    .toLowerCase()
-            , []);
-
-            const categoriasDisponibles = React.useMemo(() => {
-                const items = currentView === 'mas' ? masItems : diarios;
-                const cats = new Set(items.map(item => item.categoria).filter(Boolean));
-                return ["Todos", ...Array.from(cats).sort()];
-            }, [currentView, diarios, masItems]);
+                    .toLowerCase();
 
             const itemsActivos = currentView === 'mas' ? masItems : diarios;
 
-            const diariosFiltrados = React.useMemo(() => {
-                return itemsActivos.filter((diario) => {
-                    const texto = limpiar(busqueda);
-                    const coincideBusqueda = limpiar(diario.name).includes(texto);
-                    const coincideCategoria =
-                        limpiar(categoria) === "todos" ||
-                        limpiar(diario.categoria) === limpiar(categoria);
-                    return coincideBusqueda && coincideCategoria;
-                });
-            }, [itemsActivos, busqueda, categoria, limpiar]);
+            const categoriasDisponibles = (() => {
+                const cats = new Set(itemsActivos.map(item => item.categoria).filter(Boolean));
+                return ["Todos", ...Array.from(cats).sort()];
+            })();
+
+            const diariosFiltrados = itemsActivos.filter((diario) => {
+                const texto = limpiar(busqueda);
+                const coincideBusqueda = limpiar(diario.name).includes(texto);
+                const coincideCategoria =
+                    limpiar(categoria) === "todos" ||
+                    limpiar(diario.categoria) === limpiar(categoria);
+                return coincideBusqueda && coincideCategoria;
+            });
 
             const handleHome = () => {
                 setSelectedTomo(null);

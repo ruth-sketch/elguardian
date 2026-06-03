@@ -418,18 +418,27 @@
 
             useEffect(() => {
                 Promise.all([
-                    fetch('diarios.json?v=' + Date.now()).then(res => {
-                        if (!res.ok) throw new Error('No se pudo cargar la base de datos de Diarios');
-                        return res.json();
-                    }),
-                    fetch('mas.json?v=' + Date.now()).then(res => {
-                        if (!res.ok) throw new Error('No se pudo cargar la base de datos de Más');
-                        return res.json();
-                    })
+                    fetch('diarios.json?v=' + Date.now())
+                        .then(res => {
+                            if (!res.ok) throw new Error('No se pudo cargar la base de datos de Diarios');
+                            return res.json();
+                        }),
+                    fetch('mas.json?v=' + Date.now())
+                        .then(res => {
+                            if (!res.ok) {
+                                console.warn('No se pudo cargar mas.json, usando listado vacío');
+                                return [];
+                            }
+                            return res.json();
+                        })
+                        .catch(err => {
+                            console.warn('Error al cargar mas.json:', err);
+                            return [];
+                        })
                 ])
                 .then(([diariosData, masData]) => {
-                    setDiarios(diariosData);
-                    setMasItems(masData);
+                    setDiarios(diariosData || []);
+                    setMasItems(masData || []);
                     setLoading(false);
                 })
                 .catch(err => {
@@ -438,6 +447,8 @@
                     setLoading(false);
                 });
             }, []);
+
+
 
             const handleHome = () => {
                 setSelectedTomo(null);

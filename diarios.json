@@ -2,6 +2,7 @@
     {
         "name": "el guardian",
         "categoria": "ciencia",
+        "titulo": "Edición N.º 1 – Abril 2026",
         "tomos": [
             {
                 "name": "1.png",
@@ -22,6 +23,33 @@
             {
                 "name": "edicion_01_abril_2026.pdf",
                 "path": "diarios/el guardian/edicion_01_abril_2026.pdf"
+            }
+        ]
+    },
+    {
+        "name": "edicion_02_julio_26",
+        "categoria": "ciencia",
+        "titulo": "Edición N.º 2 – Julio 2026",
+        "tomos": [
+            {
+                "name": "1.png",
+                "path": "diarios/edicion_02_julio_26/1.png"
+            },
+            {
+                "name": "2.png",
+                "path": "diarios/edicion_02_julio_26/2.png"
+            },
+            {
+                "name": "3.png",
+                "path": "diarios/edicion_02_julio_26/3.png"
+            },
+            {
+                "name": "4.png",
+                "path": "diarios/edicion_02_julio_26/4.png"
+            },
+            {
+                "name": "edicion_02_julio_26.pdf",
+                "path": "diarios/edicion_02_julio_26/edicion_02_julio_26.pdf"
             }
         ]
     },

@@ -51,9 +51,21 @@ def scan_diarios(base_path):
                 
                 # Merge metadata
                 categoria = metadata.get(name_lower, {}).get('categoria')
-                if not categoria:
-                    categoria = "actualidad"
+                if not categoria or name_lower == 'edicion_02_julio_26':
+                    if 'guardian' in name_lower or name_lower.startswith('edicion_'):
+                        categoria = "ciencia"
+                    else:
+                        categoria = "actualidad"
                 diario_item["categoria"] = categoria
+                
+                titulo = metadata.get(name_lower, {}).get('titulo')
+                if not titulo:
+                    if name_lower == 'el guardian':
+                        titulo = "Edición N.º 1 – Abril 2026"
+                    elif name_lower == 'edicion_02_julio_26':
+                        titulo = "Edición N.º 2 – Julio 2026"
+                if titulo:
+                    diario_item["titulo"] = titulo
                 
                 portada = metadata.get(name_lower, {}).get('portada')
                 if portada:
@@ -62,9 +74,10 @@ def scan_diarios(base_path):
                 diario_item["tomos"] = tomo_files
                 diarios.append(diario_item)
     
-    # Custom Sort: 'el guardian' 1st, 'el universo' 2nd, 'el observador' 3rd, then rest alphabetically
+    # Custom Sort: 'el guardian' 1st, 'edicion_02_julio_26' 2nd, 'el universo' 3rd, 'el observador' 4th, then rest alphabetically
     priority = {
         'el guardian': 0,
+        'edicion_02_julio_26': 0.5,
         'el universo': 1,
         'el observador': 2,
         'el guardian ii': 1000  # Put it last

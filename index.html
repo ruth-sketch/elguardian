@@ -329,7 +329,7 @@
                                 </button>
                             ))}
                             {currentDiario && <span className="text-slate-600">/</span>}
-                            {currentDiario && <button className="text-brand font-bold capitalize">{currentDiario.name}</button>}
+                            {currentDiario && <button className="text-brand font-bold capitalize">{currentDiario.titulo || currentDiario.name}</button>}
                         </nav>
 
                         <div className="flex items-center gap-3">
@@ -405,7 +405,7 @@
                             {currentDiario && (
                                 <div className="mt-4 px-4 py-3 rounded-xl bg-brand/10 border border-brand/20">
                                     <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Viendo</p>
-                                    <p className="text-brand font-bold capitalize text-sm">{currentDiario.name}</p>
+                                    <p className="text-brand font-bold capitalize text-sm">{currentDiario.titulo || currentDiario.name}</p>
                                 </div>
                             )}
                         </div>
@@ -537,6 +537,7 @@
             const firstTomo = diario.tomos && diario.tomos.length > 0 ? diario.tomos[0] : null;
             const coverPath = diario.portada || (firstTomo ? firstTomo.path : null);
             const hasImageCover = coverPath && !coverPath.toLowerCase().endsWith('.pdf');
+            const displayTitle = diario.titulo || diario.name;
 
             return (
                 <div
@@ -547,7 +548,7 @@
                         {hasImageCover ? (
                             <img
                                 src={coverPath}
-                                alt={diario.name}
+                                alt={displayTitle}
                                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                             />
                         ) : (
@@ -558,12 +559,12 @@
                             <span className="bg-brand text-[10px] uppercase font-bold px-2 py-1 rounded mb-2 inline-block tracking-wider shadow-sm">
                                 {diario.tomos.length} {isMas ? 'Archivos' : 'Tomos'}
                             </span>
-                            <h3 className="text-2xl font-bold capitalize">{diario.name}</h3>
+                            <h3 className="text-2xl font-bold capitalize">{displayTitle}</h3>
                         </div>
                     </div>
                     <div className="p-5">
                         <p className="text-slate-400 text-sm mb-4 line-clamp-2 italic">
-                            {isMas ? `Explora los archivos de ${diario.name}.` : `Explora las ediciones de ${diario.name}.`}
+                            {isMas ? `Explora los archivos de ${displayTitle}.` : `Explora las ediciones de ${displayTitle}.`}
                         </p>
                         <button className="text-brand font-semibold text-sm flex items-center gap-2 group/btn">
                             {isMas ? 'Ver Archivos' : 'Ver Tomos'}
@@ -697,7 +698,7 @@
 
             const diariosFiltrados = itemsActivos.filter((diario) => {
                 const texto = limpiar(busqueda);
-                const coincideBusqueda = limpiar(diario.name).includes(texto);
+                const coincideBusqueda = limpiar(diario.name).includes(texto) || limpiar(diario.titulo).includes(texto);
                 const coincideCategoria =
                     limpiar(categoria) === "todos" ||
                     limpiar(diario.categoria) === limpiar(categoria);
@@ -823,7 +824,7 @@
                                             {currentView === 'mas' ? '← Volver a Más' : '← Volver a Diarios'}
                                         </button>
                                         <h2 className="text-3xl md:text-5xl font-bold capitalize">
-                                            {currentDiario.name}
+                                            {currentDiario.titulo || currentDiario.name}
                                         </h2>
                                     </div>
                                     <div className="bg-slate-800/50 px-4 py-2 rounded-xl border border-white/5">
